@@ -1,20 +1,27 @@
 {
   "author": "Freetime Maker",
-  "category": "Ads",
-  "extensionNamespace": "",
-  "fullName": "PaymentSDK",
-  "gdevelopVersion": "",
+  "category": "Other",
+  "extensionNamespace": "PaymentSDK",
+  "fullName": "PaymentSDK - Crypto Payments & Donations",
+  "gdevelopVersion": "5.0+",
   "helpPath": "https://github.com/FreetimeMaker/Payment-SDK",
   "iconUrl": "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAyMy4wLjMsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iSWNvbnMiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB2aWV3Qm94PSIwIDAgMzIgMzIiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDMyIDMyOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+DQo8Zz4NCgk8cGF0aCBkPSJNMjcsMTBINmMtMS4xLDAtMi0wLjktMi0yczAuOS0yLDItMmg0YzAuNiwwLDEtMC40LDEtMXMtMC40LTEtMS0xSDZDMy44LDQsMiw1LjgsMiw4djE2YzAsMi4yLDEuOCw0LDQsNGgyMQ0KCQljMS43LDAsMy0xLjMsMy0zVjEzQzMwLDExLjMsMjguNywxMCwyNywxMHogTTI4LDE1Ljh2Ni40Yy0wLjMtMC4xLTAuNi0wLjItMS0wLjJoLTRjLTEuNywwLTMtMS4zLTMtM3MxLjMtMywzLTNoNA0KCQlDMjcuNCwxNiwyNy43LDE1LjksMjgsMTUuOHoiLz4NCgk8cGF0aCBkPSJNNyw3QzYuNCw3LDYsNy40LDYsOHMwLjQsMSwxLDFoNGMwLDAsMCwwLDAsMHMwLDAsMCwwaDE1YzAuMywwLDAuNi0wLjIsMC44LTAuNGMwLjItMC4zLDAuMi0wLjYsMC4xLTAuOWwtMi01DQoJCWMtMC4yLTAuNS0wLjgtMC44LTEuMy0wLjZMMTAuOCw3SDd6Ii8+DQoJPHBhdGggZD0iTTI1LDE4aC0yYy0wLjYsMC0xLDAuNC0xLDFzMC40LDEsMSwxaDJjMC42LDAsMS0wLjQsMS0xUzI1LjYsMTgsMjUsMTh6Ii8+DQo8L2c+DQo8L3N2Zz4NCg==",
   "name": "PaymentSDK",
   "previewIconUrl": "https://asset-resources.gdevelop.io/public-resources/Icons/Glyphster Pack/Master/SVG/Shopping and Ecommerce/b19e495f428ad0a21a0079b2941368d4c264de3477e5b9099192a038c0da3f09_Shopping and Ecommerce_wallet_money_cash.svg",
   "shortDescription": "Accept Crypto Payments & Donations in your GDevelop Games",
   "version": "1.0.0",
-  "description": "This is the Official GDevelop Port of FreetimeSDK from FreetimeMaker on GitHub. You can accept multiple Crypto Currencies for Payments and Donations with PaymentSDK.",
+  "description": "The Official GDevelop Port of FreetimeSDK - Accept multiple cryptocurrencies (BTC, ETH, LTC, SOL, and more) for payments and donations directly in your games. Features include: USD-to-Crypto conversion, external wallet integration (Trust Wallet, MetaMask, etc.), real-time fee calculation, player profiles and leaderboards, and secure transaction processing.",
   "tags": [
     "crypto",
     "payments",
-    "donations"
+    "donations",
+    "cryptocurrency",
+    "blockchain",
+    "wallet",
+    "monetization",
+    "bitcoin",
+    "ethereum",
+    "web3"
   ],
   "authorIds": [
     "OAukac52NaXxAEaa7e3XaqhS0H32"
