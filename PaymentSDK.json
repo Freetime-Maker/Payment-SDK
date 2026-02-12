@@ -29,5 +29,136 @@
   "dependencies": [],
   "globalVariables": [],
   "sceneVariables": [],
-  "eventsFunctions": []
+  "eventsFunctions": [
+    {
+      "description": "Initializes the PaymentSDK config (e.g. default fee, currency).",
+      "fullName": "Init PaymentSDK",
+      "functionType": "Action",
+      "name": "InitConfig",
+      "sentence": "Initialize PaymentSDK with default settings",
+      "events": [],
+      "parameters": [
+        {
+          "name": "DevFeePercent",
+          "type": "number",
+          "optional": false,
+          "description": "Developer fee in percent (e.g. 5 for 5%)"
+        },
+        {
+          "name": "DefaultFiat",
+          "type": "string",
+          "optional": true,
+          "description": "Default fiat currency code (e.g. USD)"
+        }
+      ],
+      "objectGroups": [],
+      "private": false,
+      "tags": [],
+      "eventsBasedBehaviors": [],
+      "eventsFunctions": [],
+      "usingDeprecatedEventsFunctions": false,
+      "functionTypeInfo": {
+        "isAsync": false
+      },
+      "jsCode": "/*\nInit global config in a hidden namespace on runtime.\n*/\nconst runtime = eventsFunctionContext.getRuntimeScene().getGame().getVariables();\nlet sdkVar = runtime.get(\"PaymentSDK_Config\");\nif (!sdkVar) {\n  sdkVar = runtime.get(\"PaymentSDK_Config\");\n}\n// Store dev fee and default fiat\nsdkVar.getChild(\"DevFeePercent\").setNumber(eventsFunctionContext.getArgument(\"DevFeePercent\"));\nconst defaultFiat = eventsFunctionContext.getArgument(\"DefaultFiat\") || \"USD\";\nsdkVar.getChild(\"DefaultFiat\").setString(defaultFiat);\n"
+    },
+    {
+      "description": "Registers a coin with its address and optional URI scheme.",
+      "fullName": "Set coin config",
+      "functionType": "Action",
+      "name": "SetCoinConfig",
+      "sentence": "Set coin _PARAM1_ with address _PARAM2_ and URI scheme _PARAM3_",
+      "events": [],
+      "parameters": [
+        {
+          "name": "CoinSymbol",
+          "type": "string",
+          "optional": false,
+          "description": "Coin symbol (e.g. BTC, ETH, LTC)"
+        },
+        {
+          "name": "Address",
+          "type": "string",
+          "optional": false,
+          "description": "Wallet address for this coin"
+        },
+        {
+          "name": "UriScheme",
+          "type": "string",
+          "optional": true,
+          "description": "URI scheme template, e.g. bitcoin:{address}?amount={amount}"
+        }
+      ],
+      "objectGroups": [],
+      "private": false,
+      "tags": [],
+      "eventsBasedBehaviors": [],
+      "eventsFunctions": [],
+      "usingDeprecatedEventsFunctions": false,
+      "functionTypeInfo": {
+        "isAsync": false
+      },
+      "jsCode": "const gameVars = eventsFunctionContext.getRuntimeScene().getGame().getVariables();\nconst coinsVar = gameVars.get(\"PaymentSDK_Coins\");\nconst symbol = eventsFunctionContext.getArgument(\"CoinSymbol\");\nconst coinVar = coinsVar.getChild(symbol);\ncoinVar.getChild(\"Address\").setString(eventsFunctionContext.getArgument(\"Address\"));\nconst uri = eventsFunctionContext.getArgument(\"UriScheme\") || \"\";\ncoinVar.getChild(\"UriScheme\").setString(uri);\n"
+    },
+    {
+      "description": "Returns the developer fee amount for a given total amount.",
+      "fullName": "Get dev fee amount",
+      "functionType": "Expression",
+      "name": "GetDevFeeAmount",
+      "sentence": "",
+      "events": [],
+      "parameters": [
+        {
+          "name": "TotalAmount",
+          "type": "number",
+          "optional": false,
+          "description": "Total amount in coin units"
+        }
+      ],
+      "objectGroups": [],
+      "private": false,
+      "tags": [],
+      "eventsBasedBehaviors": [],
+      "eventsFunctions": [],
+      "usingDeprecatedEventsFunctions": false,
+      "functionTypeInfo": {
+        "isAsync": false,
+        "expressionType": "number"
+      },
+      "jsCode": "const gameVars = eventsFunctionContext.getRuntimeScene().getGame().getVariables();\nconst cfg = gameVars.get(\"PaymentSDK_Config\");\nconst feePercent = cfg.getChild(\"DevFeePercent\").getAsNumber() || 0;\nconst total = eventsFunctionContext.getArgument(\"TotalAmount\");\nconst fee = total * (feePercent / 100.0);\n// Return fee amount\nreturn fee;\n"
+    },
+    {
+      "description": "Builds a payment URI for a coin and amount.",
+      "fullName": "Build payment URI",
+      "functionType": "Expression",
+      "name": "BuildPaymentUri",
+      "sentence": "",
+      "events": [],
+      "parameters": [
+        {
+          "name": "CoinSymbol",
+          "type": "string",
+          "optional": false,
+          "description": "Coin symbol"
+        },
+        {
+          "name": "Amount",
+          "type": "number",
+          "optional": false,
+          "description": "Amount in coin units (including fee if desired)"
+        }
+      ],
+      "objectGroups": [],
+      "private": false,
+      "tags": [],
+      "eventsBasedBehaviors": [],
+      "eventsFunctions": [],
+      "usingDeprecatedEventsFunctions": false,
+      "functionTypeInfo": {
+        "isAsync": false,
+        "expressionType": "string"
+      },
+      "jsCode": "const gameVars = eventsFunctionContext.getRuntimeScene().getGame().getVariables();\nconst coinsVar = gameVars.get(\"PaymentSDK_Coins\");\nconst symbol = eventsFunctionContext.getArgument(\"CoinSymbol\");\nconst amount = eventsFunctionContext.getArgument(\"Amount\");\nconst coinVar = coinsVar.getChild(symbol);\nconst address = coinVar.getChild(\"Address\").getAsString();\nconst template = coinVar.getChild(\"UriScheme\").getAsString() || \"\";\nif (!template) {\n  // Fallback: simple scheme like 'bitcoin:address?amount=...'\n  return symbol.toLowerCase() + \":\" + address + \"?amount=\" + amount;\n}\nlet uri = template;\nuri = uri.replace(\"{address}\", encodeURIComponent(address));\nuri = uri.replace(\"{amount}\", encodeURIComponent(String(amount)));\nreturn uri;\n"
+    }
+  ]
 }
