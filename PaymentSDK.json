@@ -1,9 +1,11 @@
 {
   "author": "FreetimeMaker",
-  "category": "Ads",
+  "category": "Other",
   "extensionNamespace": "PaymentSDK",
   "fullName": "PaymentSDK - Crypto Payments & Donations",
   "gdevelopVersion": "5.0+",
+  "iconUrl": "https://asset-resources.gdevelop.io/public-resources/Icons/Glyphster Pack/Master/SVG/Shopping and Ecommerce/b19e495f428ad0a21a0079b2941368d4c264de3477e5b9099192a038c0da3f09_Shopping and Ecommerce_wallet_money_cash.svg",
+  "previewIconUrl": "https://asset-resources.gdevelop.io/public-resources/Icons/Glyphster Pack/Master/SVG/Shopping and Ecommerce/b19e495f428ad0a21a0079b2941368d4c264de3477e5b9099192a038c0da3f09_Shopping and Ecommerce_wallet_money_cash.svg",
   "helpPath": "https://github.com/FreetimeMaker/Payment-SDK",
   "name": "PaymentSDK",
   "shortDescription": "Accept Crypto Payments & Donations in GDevelop Games",
@@ -14,6 +16,191 @@
   "dependencies": [],
   "globalVariables": [],
   "sceneVariables": [],
+  "actions": [
+    {
+      "name": "InitializePaymentSDK",
+      "fullName": "Initialize Payment SDK",
+      "description": "Initialize the Payment SDK",
+      "sentence": "Initialize Payment SDK",
+      "category": "Payments"
+    },
+    {
+      "name": "SetUserWalletAddress",
+      "fullName": "Set User Wallet Address",
+      "description": "Configure a wallet address for a cryptocurrency",
+      "sentence": "Set wallet for _PARAM0_ to _PARAM1_",
+      "category": "Wallet",
+      "parameters": [
+        {"name": "coinType", "type": "string", "description": "Cryptocurrency type (BTC, ETH, LTC, SOL, etc.)"},
+        {"name": "address", "type": "string", "description": "Wallet address"},
+        {"name": "name", "type": "string", "description": "Wallet name", "optional": true}
+      ]
+    },
+    {
+      "name": "SetAcceptedCryptocurrencies",
+      "fullName": "Set Accepted Cryptocurrencies",
+      "description": "Define which cryptocurrencies to accept",
+      "sentence": "Set accepted cryptocurrencies to _PARAM0_",
+      "category": "Configuration",
+      "parameters": [
+        {"name": "cryptocurrencies", "type": "string", "description": "Comma-separated list (BTC,ETH,LTC,SOL)"}
+      ]
+    },
+    {
+      "name": "SendCryptocurrency",
+      "fullName": "Send Cryptocurrency",
+      "description": "Send cryptocurrency to a recipient",
+      "sentence": "Send _PARAM3_ from _PARAM0_ to _PARAM1_ (amount: _PARAM2_)",
+      "category": "Payments",
+      "parameters": [
+        {"name": "fromAddress", "type": "string", "description": "Sender wallet address"},
+        {"name": "toAddress", "type": "string", "description": "Recipient wallet address"},
+        {"name": "amount", "type": "number", "description": "Amount to send"},
+        {"name": "coinType", "type": "string", "description": "Cryptocurrency type"},
+        {"name": "includeFees", "type": "boolean", "description": "Include fees", "optional": true}
+      ]
+    },
+    {
+      "name": "ProcessDonation",
+      "fullName": "Process Donation",
+      "description": "Process a cryptocurrency donation",
+      "sentence": "Process _PARAM1_ donation of _PARAM0_",
+      "category": "Donations",
+      "parameters": [
+        {"name": "amount", "type": "number", "description": "Donation amount"},
+        {"name": "coinType", "type": "string", "description": "Cryptocurrency type"},
+        {"name": "donorWallet", "type": "string", "description": "Donor wallet address"},
+        {"name": "noFees", "type": "boolean", "description": "No fees", "optional": true}
+      ]
+    },
+    {
+      "name": "ConvertUSDToCryptocurrency",
+      "fullName": "Convert USD to Cryptocurrency",
+      "description": "Convert USD to cryptocurrency",
+      "sentence": "Convert _PARAM0_ USD to _PARAM1_",
+      "category": "Conversion",
+      "parameters": [
+        {"name": "usdAmount", "type": "number", "description": "USD amount"},
+        {"name": "coinType", "type": "string", "description": "Target cryptocurrency"}
+      ]
+    },
+    {
+      "name": "GetFeeEstimate",
+      "fullName": "Get Fee Estimate",
+      "description": "Get estimated transaction fees",
+      "sentence": "Get fee estimate for _PARAM3_ from _PARAM0_ to _PARAM1_ (amount: _PARAM2_)",
+      "category": "Fees",
+      "parameters": [
+        {"name": "fromAddress", "type": "string", "description": "Sender address"},
+        {"name": "toAddress", "type": "string", "description": "Recipient address"},
+        {"name": "amount", "type": "number", "description": "Transaction amount"},
+        {"name": "coinType", "type": "string", "description": "Cryptocurrency type"}
+      ]
+    }
+  ],
+  "conditions": [
+    {
+      "name": "IsSDKInitialized",
+      "fullName": "Is SDK Initialized",
+      "description": "Check if Payment SDK is initialized",
+      "sentence": "Payment SDK is initialized",
+      "category": "Payments"
+    },
+    {
+      "name": "IsWalletConfigured",
+      "fullName": "Is Wallet Configured",
+      "description": "Check if wallet is configured",
+      "sentence": "Wallet is configured for _PARAM0_",
+      "category": "Wallet",
+      "parameters": [
+        {"name": "coinType", "type": "string", "description": "Cryptocurrency type"}
+      ]
+    },
+    {
+      "name": "IsCryptocurrencyAccepted",
+      "fullName": "Is Cryptocurrency Accepted",
+      "description": "Check if cryptocurrency is accepted",
+      "sentence": "_PARAM0_ is accepted cryptocurrency",
+      "category": "Configuration",
+      "parameters": [
+        {"name": "coinType", "type": "string", "description": "Cryptocurrency type"}
+      ]
+    },
+    {
+      "name": "IsTransactionConfirmed",
+      "fullName": "Is Transaction Confirmed",
+      "description": "Check if transaction is confirmed",
+      "sentence": "Transaction _PARAM0_ is confirmed",
+      "category": "Payments",
+      "parameters": [
+        {"name": "txHash", "type": "string", "description": "Transaction hash", "optional": true}
+      ]
+    }
+  ],
+  "expressions": [
+    {
+      "name": "GetTransactionHash",
+      "fullName": "Get Last Transaction Hash",
+      "description": "Get hash of last transaction",
+      "sentence": "Last transaction hash",
+      "returnType": "string",
+      "category": "Payments"
+    },
+    {
+      "name": "GetFeeEstimateValue",
+      "fullName": "Get Fee Estimate",
+      "description": "Get estimated fee",
+      "sentence": "Fee estimate",
+      "returnType": "string",
+      "category": "Fees"
+    },
+    {
+      "name": "GetWalletAddress",
+      "fullName": "Get Wallet Address",
+      "description": "Get wallet address for cryptocurrency",
+      "sentence": "Wallet address for _PARAM0_",
+      "returnType": "string",
+      "category": "Wallet",
+      "parameters": [
+        {"name": "coinType", "type": "string", "description": "Cryptocurrency type"}
+      ]
+    },
+    {
+      "name": "GetConvertedAmount",
+      "fullName": "Get Converted Amount",
+      "description": "Get converted cryptocurrency amount",
+      "sentence": "Converted amount",
+      "returnType": "string",
+      "category": "Conversion"
+    },
+    {
+      "name": "GetTransactionConfirmations",
+      "fullName": "Get Transaction Confirmations",
+      "description": "Get number of confirmations",
+      "sentence": "Confirmations of _PARAM0_",
+      "returnType": "number",
+      "category": "Payments",
+      "parameters": [
+        {"name": "txHash", "type": "string", "description": "Transaction hash", "optional": true}
+      ]
+    },
+    {
+      "name": "GetDeepLink",
+      "fullName": "Get Deep Link",
+      "description": "Get generated deep link",
+      "sentence": "Deep link",
+      "returnType": "string",
+      "category": "Wallet"
+    },
+    {
+      "name": "GetSDKVersion",
+      "fullName": "Get SDK Version",
+      "description": "Get SDK version",
+      "sentence": "SDK version",
+      "returnType": "string",
+      "category": "Payments"
+    }
+  ],
   "eventsFunctions": [
     {
       "name": "InitializePaymentSDK",
@@ -96,99 +283,5 @@
       ]
     }
   ],
-  "eventsConditions": [
-    {
-      "name": "IsSDKInitialized",
-      "fullName": "Is SDK Initialized",
-      "type": "condition",
-      "description": "Check if Payment SDK is initialized",
-      "category": "Payments"
-    },
-    {
-      "name": "IsWalletConfigured",
-      "fullName": "Is Wallet Configured",
-      "type": "condition",
-      "description": "Check if wallet is configured",
-      "category": "Wallet",
-      "parameters": [
-        {"name": "coinType", "type": "string"}
-      ]
-    },
-    {
-      "name": "IsCryptocurrencyAccepted",
-      "fullName": "Is Cryptocurrency Accepted",
-      "type": "condition",
-      "description": "Check if cryptocurrency is accepted",
-      "category": "Configuration",
-      "parameters": [
-        {"name": "coinType", "type": "string"}
-      ]
-    },
-    {
-      "name": "IsTransactionConfirmed",
-      "fullName": "Is Transaction Confirmed",
-      "type": "condition",
-      "description": "Check if transaction is confirmed",
-      "category": "Payments",
-      "parameters": [
-        {"name": "txHash", "type": "string", "optional": true}
-      ]
-    }
-  ],
-  "eventsExpressions": [
-    {
-      "name": "GetTransactionHash",
-      "fullName": "Get Last Transaction Hash",
-      "type": "expression",
-      "description": "Get hash of last transaction",
-      "returnType": "string",
-      "category": "Payments"
-    },
-    {
-      "name": "GetFeeEstimate",
-      "fullName": "Get Fee Estimate",
-      "type": "expression",
-      "description": "Get estimated fee",
-      "returnType": "string",
-      "category": "Fees"
-    },
-    {
-      "name": "GetWalletAddress",
-      "fullName": "Get Wallet Address",
-      "type": "expression",
-      "description": "Get wallet address for cryptocurrency",
-      "returnType": "string",
-      "category": "Wallet",
-      "parameters": [
-        {"name": "coinType", "type": "string"}
-      ]
-    },
-    {
-      "name": "GetConvertedAmount",
-      "fullName": "Get Converted Amount",
-      "type": "expression",
-      "description": "Get converted cryptocurrency amount",
-      "returnType": "string",
-      "category": "Conversion"
-    },
-    {
-      "name": "GetTransactionConfirmations",
-      "fullName": "Get Transaction Confirmations",
-      "type": "expression",
-      "description": "Get number of confirmations",
-      "returnType": "number",
-      "category": "Payments",
-      "parameters": [
-        {"name": "txHash", "type": "string", "optional": true}
-      ]
-    },
-    {
-      "name": "GetDeepLink",
-      "fullName": "Get Deep Link",
-      "type": "expression",
-      "description": "Get generated deep link",
-      "returnType": "string",
-      "category": "Wallet"
-    }
-  ]
+  "authorIds": ["OAukac52NaXxAEaa7e3XaqhS0H32"]
 }
