@@ -16,12 +16,10 @@
   "dependencies": [],
   "globalVariables": [],
   "sceneVariables": [],
-
-  "eventsFunctions": [
+  "actions": [
     {
       "name": "InitializePaymentSDK",
       "fullName": "Initialize Payment SDK",
-      "type": "action",
       "description": "Initialize the Payment SDK",
       "sentence": "Initialize Payment SDK",
       "category": "Payments"
@@ -29,7 +27,6 @@
     {
       "name": "SetUserWalletAddress",
       "fullName": "Set User Wallet Address",
-      "type": "action",
       "description": "Configure a wallet address for a cryptocurrency",
       "sentence": "Set wallet for _PARAM0_ to _PARAM1_",
       "category": "Wallet",
@@ -42,7 +39,6 @@
     {
       "name": "SetAcceptedCryptocurrencies",
       "fullName": "Set Accepted Cryptocurrencies",
-      "type": "action",
       "description": "Define which cryptocurrencies to accept",
       "sentence": "Set accepted cryptocurrencies to _PARAM0_",
       "category": "Configuration",
@@ -53,7 +49,6 @@
     {
       "name": "SendCryptocurrency",
       "fullName": "Send Cryptocurrency",
-      "type": "action",
       "description": "Send cryptocurrency to a recipient",
       "sentence": "Send _PARAM3_ from _PARAM0_ to _PARAM1_ (amount: _PARAM2_)",
       "category": "Payments",
@@ -68,7 +63,6 @@
     {
       "name": "ProcessDonation",
       "fullName": "Process Donation",
-      "type": "action",
       "description": "Process a cryptocurrency donation",
       "sentence": "Process _PARAM1_ donation of _PARAM0_",
       "category": "Donations",
@@ -82,7 +76,6 @@
     {
       "name": "ConvertUSDToCryptocurrency",
       "fullName": "Convert USD to Cryptocurrency",
-      "type": "action",
       "description": "Convert USD to cryptocurrency",
       "sentence": "Convert _PARAM0_ USD to _PARAM1_",
       "category": "Conversion",
@@ -94,7 +87,6 @@
     {
       "name": "GetFeeEstimate",
       "fullName": "Get Fee Estimate",
-      "type": "action",
       "description": "Get estimated transaction fees",
       "sentence": "Get fee estimate for _PARAM3_ from _PARAM0_ to _PARAM1_ (amount: _PARAM2_)",
       "category": "Fees",
@@ -104,11 +96,12 @@
         {"name": "amount", "type": "number", "description": "Transaction amount"},
         {"name": "coinType", "type": "string", "description": "Cryptocurrency type"}
       ]
-    },
+    }
+  ],
+  "conditions": [
     {
       "name": "IsSDKInitialized",
       "fullName": "Is SDK Initialized",
-      "type": "condition",
       "description": "Check if Payment SDK is initialized",
       "sentence": "Payment SDK is initialized",
       "category": "Payments"
@@ -116,7 +109,6 @@
     {
       "name": "IsWalletConfigured",
       "fullName": "Is Wallet Configured",
-      "type": "condition",
       "description": "Check if wallet is configured",
       "sentence": "Wallet is configured for _PARAM0_",
       "category": "Wallet",
@@ -127,7 +119,6 @@
     {
       "name": "IsCryptocurrencyAccepted",
       "fullName": "Is Cryptocurrency Accepted",
-      "type": "condition",
       "description": "Check if cryptocurrency is accepted",
       "sentence": "_PARAM0_ is accepted cryptocurrency",
       "category": "Configuration",
@@ -138,18 +129,18 @@
     {
       "name": "IsTransactionConfirmed",
       "fullName": "Is Transaction Confirmed",
-      "type": "condition",
       "description": "Check if transaction is confirmed",
       "sentence": "Transaction _PARAM0_ is confirmed",
       "category": "Payments",
       "parameters": [
         {"name": "txHash", "type": "string", "description": "Transaction hash", "optional": true}
       ]
-    },
+    }
+  ],
+  "expressions": [
     {
       "name": "GetTransactionHash",
       "fullName": "Get Last Transaction Hash",
-      "type": "expression",
       "description": "Get hash of last transaction",
       "sentence": "Last transaction hash",
       "returnType": "string",
@@ -158,7 +149,6 @@
     {
       "name": "GetFeeEstimateValue",
       "fullName": "Get Fee Estimate",
-      "type": "expression",
       "description": "Get estimated fee",
       "sentence": "Fee estimate",
       "returnType": "string",
@@ -167,7 +157,6 @@
     {
       "name": "GetWalletAddress",
       "fullName": "Get Wallet Address",
-      "type": "expression",
       "description": "Get wallet address for cryptocurrency",
       "sentence": "Wallet address for _PARAM0_",
       "returnType": "string",
@@ -179,7 +168,6 @@
     {
       "name": "GetConvertedAmount",
       "fullName": "Get Converted Amount",
-      "type": "expression",
       "description": "Get converted cryptocurrency amount",
       "sentence": "Converted amount",
       "returnType": "string",
@@ -188,7 +176,6 @@
     {
       "name": "GetTransactionConfirmations",
       "fullName": "Get Transaction Confirmations",
-      "type": "expression",
       "description": "Get number of confirmations",
       "sentence": "Confirmations of _PARAM0_",
       "returnType": "number",
@@ -200,7 +187,6 @@
     {
       "name": "GetDeepLink",
       "fullName": "Get Deep Link",
-      "type": "expression",
       "description": "Get generated deep link",
       "sentence": "Deep link",
       "returnType": "string",
@@ -209,12 +195,12 @@
     {
       "name": "GetSDKVersion",
       "fullName": "Get SDK Version",
-      "type": "expression",
       "description": "Get SDK version",
       "sentence": "SDK version",
       "returnType": "string",
       "category": "Payments"
     }
   ],
+  "eventsFunctions": [],
   "authorIds": ["OAukac52NaXxAEaa7e3XaqhS0H32"]
 }
