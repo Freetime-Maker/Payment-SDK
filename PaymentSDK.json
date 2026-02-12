@@ -1,371 +1,194 @@
 {
   "author": "FreetimeMaker",
   "category": "Ads",
-  "extensionNamespace": "",
-  "fullName": "PaymentSDK",
-  "gdevelopVersion": "",
+  "extensionNamespace": "PaymentSDK",
+  "fullName": "PaymentSDK - Crypto Payments & Donations",
+  "gdevelopVersion": "5.0+",
   "helpPath": "https://github.com/FreetimeMaker/Payment-SDK",
-  "iconUrl": "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAyMy4wLjMsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iSWNvbnMiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB2aWV3Qm94PSIwIDAgMzIgMzIiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDMyIDMyOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+DQo8Zz4NCgk8cGF0aCBkPSJNMjcsMTBINmMtMS4xLDAtMi0wLjktMi0yczAuOS0yLDItMmg0YzAuNiwwLDEtMC40LDEtMXMtMC40LTEtMS0xSDZDMy44LDQsMiw1LjgsMiw4djE2YzAsMi4yLDEuOCw0LDQsNGgyMQ0KCQljMS43LDAsMy0xLjMsMy0zVjEzQzMwLDExLjMsMjguNywxMCwyNywxMHogTTI4LDE1Ljh2Ni40Yy0wLjMtMC4xLTAuNi0wLjItMS0wLjJoLTRjLTEuNywwLTMtMS4zLTMtM3MxLjMtMywzLTNoNA0KCQlDMjcuNCwxNiwyNy43LDE1LjksMjgsMTUuOHoiLz4NCgk8cGF0aCBkPSJNNyw3QzYuNCw3LDYsNy40LDYsOHMwLjQsMSwxLDFoNGMwLDAsMCwwLDAsMHMwLDAsMCwwaDE1YzAuMywwLDAuNi0wLjIsMC44LTAuNGMwLjItMC4zLDAuMi0wLjYsMC4xLTAuOWwtMi01DQoJCWMtMC4yLTAuNS0wLjgtMC44LTEuMy0wLjZMMTAuOCw3SDd6Ii8+DQoJPHBhdGggZD0iTTI1LDE4aC0yYy0wLjYsMC0xLDAuNC0xLDFzMC40LDEsMSwxaDJjMC42LDAsMS0wLjQsMS0xUzI1LjYsMTgsMjUsMTh6Ii8+DQo8L2c+DQo8L3N2Zz4NCg==",
   "name": "PaymentSDK",
-  "previewIconUrl": "https://asset-resources.gdevelop.io/public-resources/Icons/Glyphster Pack/Master/SVG/Shopping and Ecommerce/b19e495f428ad0a21a0079b2941368d4c264de3477e5b9099192a038c0da3f09_Shopping and Ecommerce_wallet_money_cash.svg",
-  "shortDescription": "Accept Crypto in your Games",
+  "shortDescription": "Accept Crypto Payments & Donations in GDevelop Games",
   "version": "1.0.0",
-  "description": "The Official GDevelop Port of FreetimeSDK - Accept multiple cryptocurrencies (BTC, ETH, LTC, SOL, and more) for payments and donations directly in your games. Features include: USD-to-Crypto conversion, external wallet integration (Trust Wallet, MetaMask, etc.), real-time fee calculation, player profiles and leaderboards, and secure transaction processing.",
-  "tags": [
-    "payment",
-    "cryptocurrency",
-    "bitcoin",
-    "ethereum",
-    "donation",
-    "wallet",
-    "usd"
-  ],
-
+  "description": "The Official GDevelop Port of FreetimeSDK - Accept multiple cryptocurrencies for payments and donations directly in your games.",
+  "tags": ["payment", "cryptocurrency", "bitcoin", "ethereum", "donation", "wallet", "usd", "crypto", "blockchain", "monetization", "web3"],
+  "authorIds": ["OAukac52NaXxAEaa7e3XaqhS0H32"],
+  "dependencies": [],
+  "globalVariables": [],
+  "sceneVariables": [],
   "eventsFunctions": [
     {
-      "type": "action",
       "name": "InitializePaymentSDK",
       "fullName": "Initialize Payment SDK",
-      "description": "Initialize Freetime Payment SDK",
-      "sentence": "Initialize Freetime Payment SDK",
-      "parameters": [],
-      "code": "const extension = runtimeScene.getExtension('FreetimePaymentSDK'); if (extension) { return extension._freetimeSDK.initialize(); } return false;"
+      "type": "action",
+      "description": "Initialize the Payment SDK",
+      "category": "Payments"
     },
     {
-      "type": "action",
       "name": "SetUserWalletAddress",
       "fullName": "Set User Wallet Address",
-      "description": "Configure a user's wallet address for a specific cryptocurrency",
-      "sentence": "Set user wallet address for _PARAM0_ to _PARAM1_ (_PARAM2_)",
+      "type": "action",
+      "description": "Configure a wallet address for a cryptocurrency",
+      "category": "Wallet",
       "parameters": [
-        { "name": "coinType", "type": "string", "description": "Cryptocurrency type (BTC, ETH, LTC, BCH, DOGE, SOL, MATIC, BNB, TRX)" },
-        { "name": "address", "type": "string", "description": "Wallet address" },
-        { "name": "name", "type": "string", "description": "Wallet name (optional)", "optional": true }
-      ],
-      "code": "const extension = runtimeScene.getExtension('FreetimePaymentSDK'); if (extension) { const coinType = arguments[0]; const address = arguments[1]; const name = arguments[2] || ''; extension._freetimeSDK.setUserWalletAddress(coinType, address, name); }"
+        {"name": "coinType", "type": "string", "description": "Cryptocurrency type"},
+        {"name": "address", "type": "string", "description": "Wallet address"},
+        {"name": "name", "type": "string", "description": "Wallet name", "optional": true}
+      ]
     },
     {
-      "type": "action",
       "name": "SetAcceptedCryptocurrencies",
       "fullName": "Set Accepted Cryptocurrencies",
-      "description": "Configure which cryptocurrencies to accept for payments",
-      "sentence": "Set accepted cryptocurrencies to _PARAM0_",
+      "type": "action",
+      "description": "Define which cryptocurrencies to accept",
+      "category": "Configuration",
       "parameters": [
-        { "name": "cryptocurrencies", "type": "string", "description": "Comma-separated list of cryptocurrency codes (BTC,ETH,LTC,BCH,DOGE,SOL,MATIC,BNB,TRX)" }
-      ],
-      "code": "const extension = runtimeScene.getExtension('FreetimePaymentSDK'); if (extension) { const cryptoList = arguments[0]; extension._freetimeSDK.setAcceptedCryptocurrencies(cryptoList); }"
+        {"name": "cryptocurrencies", "type": "string", "description": "Comma-separated list"}
+      ]
     },
     {
-      "type": "action",
       "name": "SendCryptocurrency",
       "fullName": "Send Cryptocurrency",
-      "description": "Send cryptocurrency to a recipient address with optional developer fees",
-      "sentence": "Send _PARAM3_ from _PARAM0_ to _PARAM1_ (amount: _PARAM2_) _PARAM4_",
+      "type": "action",
+      "description": "Send cryptocurrency to a recipient",
+      "category": "Payments",
       "parameters": [
-        { "name": "fromAddress", "type": "string", "description": "Sender wallet address" },
-        { "name": "toAddress", "type": "string", "description": "Recipient wallet address" },
-        { "name": "amount", "type": "string", "description": "Amount to send" },
-        { "name": "coinType", "type": "string", "description": "Cryptocurrency type (BTC, ETH, LTC, BCH, DOGE, SOL, MATIC, BNB, TRX)" },
-        { "name": "includeFees", "type": "boolean", "description": "Include developer fees (default: true)", "optional": true }
-      ],
-      "code": "const extension = runtimeScene.getExtension('FreetimePaymentSDK'); if (extension) { const fromAddress = arguments[0]; const toAddress = arguments[1]; const amount = arguments[2]; const coinType = arguments[3]; const includeFees = arguments[4] !== false; extension._freetimeSDK.sendCryptocurrency(fromAddress, toAddress, amount, coinType, includeFees); }"
+        {"name": "fromAddress", "type": "string"},
+        {"name": "toAddress", "type": "string"},
+        {"name": "amount", "type": "number"},
+        {"name": "coinType", "type": "string"},
+        {"name": "includeFees", "type": "boolean", "optional": true}
+      ]
     },
     {
-      "type": "action",
-      "name": "GetFeeEstimate",
-      "fullName": "Get Fee Estimate",
-      "description": "Get estimated fee breakdown for a cryptocurrency transaction",
-      "sentence": "Get fee estimate for _PARAM3_ from _PARAM0_ to _PARAM1_ (amount: _PARAM2_)",
-      "parameters": [
-        { "name": "fromAddress", "type": "string", "description": "Sender wallet address" },
-        { "name": "toAddress", "type": "string", "description": "Recipient wallet address" },
-        { "name": "amount", "type": "string", "description": "Transaction amount" },
-        { "name": "coinType", "type": "string", "description": "Cryptocurrency type" }
-      ],
-      "code": "const extension = runtimeScene.getExtension('FreetimePaymentSDK'); if (extension) { const fromAddress = arguments[0]; const toAddress = arguments[1]; const amount = arguments[2]; const coinType = arguments[3]; extension._freetimeSDK.getFeeEstimate(fromAddress, toAddress, amount, coinType); }"
-    },
-    {
-      "type": "action",
       "name": "ProcessDonation",
       "fullName": "Process Donation",
-      "description": "Process a cryptocurrency donation with custom options",
-      "sentence": "Process _PARAM1_ donation of _PARAM0_ from _PARAM2_ _PARAM3_ _PARAM4_ _PARAM5_",
+      "type": "action",
+      "description": "Process a cryptocurrency donation",
+      "category": "Donations",
       "parameters": [
-        { "name": "amount", "type": "string", "description": "Donation amount" },
-        { "name": "coinType", "type": "string", "description": "Cryptocurrency type" },
-        { "name": "donorWallet", "type": "string", "description": "Donor wallet address" },
-        { "name": "noFees", "type": "boolean", "description": "Process without fees (optional)", "optional": true },
-        { "name": "customLabel", "type": "string", "description": "Custom donation label (optional)", "optional": true },
-        { "name": "predefinedAmount", "type": "boolean", "description": "Is predefined amount (optional)", "optional": true }
-      ],
-      "code": "const extension = runtimeScene.getExtension('FreetimePaymentSDK'); if (extension) { const amount = arguments[0]; const coinType = arguments[1]; const donorWallet = arguments[2]; const noFees = arguments[3] || false; const customLabel = arguments[4] || ''; const predefinedAmount = arguments[5] || false; const options = { noFees: noFees, customLabel: customLabel, predefinedAmount: predefinedAmount }; extension._freetimeSDK.processDonation(amount, coinType, donorWallet, options); }"
+        {"name": "amount", "type": "number"},
+        {"name": "coinType", "type": "string"},
+        {"name": "donorWallet", "type": "string"},
+        {"name": "noFees", "type": "boolean", "optional": true}
+      ]
     },
     {
-      "type": "action",
       "name": "ConvertUSDToCryptocurrency",
       "fullName": "Convert USD to Cryptocurrency",
-      "description": "Convert USD amount to cryptocurrency using real-time rates",
-      "sentence": "Convert _PARAM0_ USD to _PARAM1_",
-      "parameters": [
-        { "name": "usdAmount", "type": "string", "description": "USD amount to convert" },
-        { "name": "coinType", "type": "string", "description": "Target cryptocurrency type" }
-      ],
-      "code": "const extension = runtimeScene.getExtension('FreetimePaymentSDK'); if (extension) { const usdAmount = arguments[0]; const coinType = arguments[1]; extension._freetimeSDK.convertUSDToCryptocurrency(usdAmount, coinType); }"
-    },
-    {
       "type": "action",
-      "name": "GenerateDeepLink",
-      "fullName": "Generate Deep Link",
-      "description": "Generate deep link for external wallet apps",
-      "sentence": "Generate deep link for _PARAM0_ to send _PARAM2_ _PARAM1_ (amount: _PARAM3_)",
+      "description": "Convert USD to cryptocurrency",
+      "category": "Conversion",
       "parameters": [
-        { "name": "walletApp", "type": "string", "description": "Wallet app name (Trust Wallet, MetaMask, Coinbase, etc.)" },
-        { "name": "coinType", "type": "string", "description": "Cryptocurrency type" },
-        { "name": "address", "type": "string", "description": "Recipient address" },
-        { "name": "amount", "type": "string", "description": "Amount to send" }
-      ],
-      "code": "const extension = runtimeScene.getExtension('FreetimePaymentSDK'); if (extension) { const walletApp = arguments[0]; const coinType = arguments[1]; const address = arguments[2]; const amount = arguments[3]; extension._freetimeSDK.generateDeepLink(walletApp, coinType, address, amount); }"
+        {"name": "usdAmount", "type": "number"},
+        {"name": "coinType", "type": "string"}
+      ]
     },
     {
-      "type": "action",
-      "name": "UpdateTransactionStatus",
-      "fullName": "Update Transaction Status",
-      "description": "Update and check transaction confirmation status",
-      "sentence": "Update transaction status for _PARAM0_",
-      "parameters": [
-        { "name": "txHash", "type": "string", "description": "Transaction hash (optional, uses last transaction if not provided)", "optional": true }
-      ],
-      "code": "const extension = runtimeScene.getExtension('FreetimePaymentSDK'); if (extension) { const txHash = arguments[0] || extension._freetimeSDK.getLastTransactionHash(); extension._freetimeSDK.getTransactionStatus(txHash); }"
-    }
-  ],
-
-  "eventsConditions": [
-    {
-      "type": "condition",
-      "name": "IsSDKInitialized",
-      "fullName": "Is SDK Initialized",
-      "description": "Check if Payment SDK is initialized",
-      "sentence": "Payment SDK is initialized",
-      "parameters": [],
-      "code": "const extension = runtimeScene.getExtension('FreetimePaymentSDK'); if (extension) { return extension._freetimeSDK.isInitialized(); } return false;"
-    },
-    {
-      "type": "condition",
-      "name": "IsWalletConfigured",
-      "fullName": "Is Wallet Configured",
-      "description": "Check if a wallet is configured for a specific cryptocurrency",
-      "sentence": "Wallet is configured for _PARAM0_",
-      "parameters": [
-        { "name": "coinType", "type": "string", "description": "Cryptocurrency type" }
-      ],
-      "code": "const extension = runtimeScene.getExtension('FreetimePaymentSDK'); if (extension) { const coinType = arguments[0]; return extension._freetimeSDK.isWalletConfigured(coinType); } return false;"
-    },
-    {
-      "type": "condition",
-      "name": "IsCryptocurrencyAccepted",
-      "fullName": "Is Cryptocurrency Accepted",
-      "description": "Check if a cryptocurrency is accepted for payments",
-      "sentence": "_PARAM0_ is accepted cryptocurrency",
-      "parameters": [
-        { "name": "coinType", "type": "string", "description": "Cryptocurrency type" }
-      ],
-      "code": "const extension = runtimeScene.getExtension('FreetimePaymentSDK'); if (extension) { const coinType = arguments[0]; return extension._freetimeSDK.isCryptocurrencyAccepted(coinType); } return false;"
-    },
-    {
-      "type": "condition",
-      "name": "IsTransactionConfirmed",
-      "fullName": "Is Transaction Confirmed",
-      "description": "Check if a transaction has been confirmed",
-      "sentence": "Transaction _PARAM0_ is confirmed",
-      "parameters": [
-        { "name": "txHash", "type": "string", "description": "Transaction hash (optional, uses last transaction if not provided)", "optional": true }
-      ],
-      "code": "const extension = runtimeScene.getExtension('FreetimePaymentSDK'); if (extension) { const txHash = arguments[0] || extension._freetimeSDK.getLastTransactionHash(); const transaction = extension._freetimeSDK.getTransactionStatus(txHash); return transaction && transaction.status === 'confirmed'; } return false;"
-    }
-  ],
-
-  "eventsExpressions": [
-    {
-      "type": "expression",
-      "name": "GetTransactionHash",
-      "fullName": "Get Last Transaction Hash",
-      "description": "Get the hash of the last transaction",
-      "returnType": "string",
-      "sentence": "Last transaction hash",
-      "parameters": [],
-      "code": "const extension = runtimeScene.getExtension('FreetimePaymentSDK'); if (extension) { return extension._freetimeSDK.getLastTransactionHash(); } return '';"
-    },
-    {
-      "type": "expression",
       "name": "GetFeeEstimate",
       "fullName": "Get Fee Estimate",
-      "description": "Get the estimated fee for the last calculated transaction",
-      "returnType": "string",
-      "sentence": "Fee estimate",
-      "parameters": [],
-      "code": "const extension = runtimeScene.getExtension('FreetimePaymentSDK'); if (extension) { return extension._freetimeSDK.getFeeEstimateString(); } return '';"
+      "type": "action",
+      "description": "Get estimated transaction fees",
+      "category": "Fees",
+      "parameters": [
+        {"name": "fromAddress", "type": "string"},
+        {"name": "toAddress", "type": "string"},
+        {"name": "amount", "type": "number"},
+        {"name": "coinType", "type": "string"}
+      ]
+    }
+  ],
+  "eventsConditions": [
+    {
+      "name": "IsSDKInitialized",
+      "fullName": "Is SDK Initialized",
+      "type": "condition",
+      "description": "Check if Payment SDK is initialized",
+      "category": "Payments"
     },
     {
-      "type": "expression",
-      "name": "GetDonationHash",
-      "fullName": "Get Last Donation Hash",
-      "description": "Get the hash of the last donation",
-      "returnType": "string",
-      "sentence": "Last donation hash",
-      "parameters": [],
-      "code": "const extension = runtimeScene.getExtension('FreetimePaymentSDK'); if (extension) { return extension._freetimeSDK.getLastDonationHash(); } return '';"
+      "name": "IsWalletConfigured",
+      "fullName": "Is Wallet Configured",
+      "type": "condition",
+      "description": "Check if wallet is configured",
+      "category": "Wallet",
+      "parameters": [
+        {"name": "coinType", "type": "string"}
+      ]
     },
     {
+      "name": "IsCryptocurrencyAccepted",
+      "fullName": "Is Cryptocurrency Accepted",
+      "type": "condition",
+      "description": "Check if cryptocurrency is accepted",
+      "category": "Configuration",
+      "parameters": [
+        {"name": "coinType", "type": "string"}
+      ]
+    },
+    {
+      "name": "IsTransactionConfirmed",
+      "fullName": "Is Transaction Confirmed",
+      "type": "condition",
+      "description": "Check if transaction is confirmed",
+      "category": "Payments",
+      "parameters": [
+        {"name": "txHash", "type": "string", "optional": true}
+      ]
+    }
+  ],
+  "eventsExpressions": [
+    {
+      "name": "GetTransactionHash",
+      "fullName": "Get Last Transaction Hash",
       "type": "expression",
+      "description": "Get hash of last transaction",
+      "returnType": "string",
+      "category": "Payments"
+    },
+    {
+      "name": "GetFeeEstimate",
+      "fullName": "Get Fee Estimate",
+      "type": "expression",
+      "description": "Get estimated fee",
+      "returnType": "string",
+      "category": "Fees"
+    },
+    {
       "name": "GetWalletAddress",
       "fullName": "Get Wallet Address",
-      "description": "Get the configured wallet address for a cryptocurrency",
+      "type": "expression",
+      "description": "Get wallet address for cryptocurrency",
       "returnType": "string",
-      "sentence": "Wallet address for _PARAM0_",
+      "category": "Wallet",
       "parameters": [
-        { "name": "coinType", "type": "string", "description": "Cryptocurrency type" }
-      ],
-      "code": "const extension = runtimeScene.getExtension('FreetimePaymentSDK'); if (extension) { const coinType = arguments[0]; return extension._freetimeSDK.getWalletAddress(coinType); } return '';"
+        {"name": "coinType", "type": "string"}
+      ]
     },
     {
-      "type": "expression",
-      "name": "GetSDKVersion",
-      "fullName": "Get SDK Version",
-      "description": "Get the current SDK version",
-      "returnType": "string",
-      "sentence": "SDK version",
-      "parameters": [],
-      "code": "const extension = runtimeScene.getExtension('FreetimePaymentSDK'); if (extension) { return extension._freetimeSDK.getSDKVersion(); } return '';"
-    },
-    {
-      "type": "expression",
-      "name": "GetDeepLink",
-      "fullName": "Get Deep Link",
-      "description": "Get the generated deep link for external wallet",
-      "returnType": "string",
-      "sentence": "Deep link",
-      "parameters": [],
-      "code": "const extension = runtimeScene.getExtension('FreetimePaymentSDK'); if (extension) { return extension._freetimeSDK.getDeepLink(); } return '';"
-    },
-    {
-      "type": "expression",
       "name": "GetConvertedAmount",
       "fullName": "Get Converted Amount",
-      "description": "Get the converted cryptocurrency amount from USD",
+      "type": "expression",
+      "description": "Get converted cryptocurrency amount",
       "returnType": "string",
-      "sentence": "Converted amount",
-      "parameters": [],
-      "code": "const extension = runtimeScene.getExtension('FreetimePaymentSDK'); if (extension) { return extension._freetimeSDK.getConvertedAmount(); } return '';"
+      "category": "Conversion"
     },
     {
-      "type": "expression",
       "name": "GetTransactionConfirmations",
       "fullName": "Get Transaction Confirmations",
-      "description": "Get the number of confirmations for a transaction",
-      "returnType": "string",
-      "sentence": "Transaction confirmations for _PARAM0_",
+      "type": "expression",
+      "description": "Get number of confirmations",
+      "returnType": "number",
+      "category": "Payments",
       "parameters": [
-        { "name": "txHash", "type": "string", "description": "Transaction hash (optional, uses last transaction if not provided)", "optional": true }
-      ],
-      "code": "const extension = runtimeScene.getExtension('FreetimePaymentSDK'); if (extension) { const txHash = arguments[0] || extension._freetimeSDK.getLastTransactionHash(); return extension._freetimeSDK.getTransactionConfirmations(txHash); } return '0';"
+        {"name": "txHash", "type": "string", "optional": true}
+      ]
+    },
+    {
+      "name": "GetDeepLink",
+      "fullName": "Get Deep Link",
+      "type": "expression",
+      "description": "Get generated deep link",
+      "returnType": "string",
+      "category": "Wallet"
     }
-  ],
-
-  "events": [
-    {
-      "name": "Initialize Payment SDK",
-      "description": "Initialize Payment SDK when game starts",
-      "conditions": [],
-      "actions": [
-        {
-          "type": "PaymentSDK::InitializePaymentSDK",
-          "parameters": []
-        }
-      ]
-    },
-    {
-      "name": "Configure Wallets",
-      "description": "Set up wallet addresses for different cryptocurrencies",
-      "conditions": [
-        {
-          "type": "PaymentSDK::IsSDKInitialized",
-          "parameters": []
-        }
-      ],
-      "actions": [
-        {
-          "type": "PaymentSDK::SetUserWalletAddress",
-          "parameters": ["BTC", "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa", "Bitcoin Wallet"]
-        },
-        {
-          "type": "PaymentSDK::SetUserWalletAddress",
-          "parameters": ["ETH", "0x742d35Cc6634C0532925a3b8D4C9db96C4b4Db45", "Ethereum Wallet"]
-        },
-        {
-          "type": "PaymentSDK::SetAcceptedCryptocurrencies",
-          "parameters": ["BTC,ETH,LTC,DOGE,SOL"]
-        }
-      ]
-    },
-    {
-      "name": "Send Cryptocurrency Payment",
-      "description": "Process a cryptocurrency payment to a recipient address",
-      "conditions": [
-        {
-          "type": "PaymentSDK::IsSDKInitialized",
-          "parameters": []
-        },
-        {
-          "type": "PaymentSDK::IsWalletConfigured",
-          "parameters": ["selectedCrypto"]
-        }
-      ],
-      "actions": [
-        {
-          "type": "PaymentSDK::GetFeeEstimate",
-          "parameters": ["btcWallet", "recipientAddress", "paymentAmount", "selectedCrypto"]
-        },
-        {
-          "type": "PaymentSDK::SendCryptocurrency",
-          "parameters": ["btcWallet", "recipientAddress", "paymentAmount", "selectedCrypto", true]
-        }
-      ]
-    },
-    {
-      "name": "Process Donation",
-      "description": "Handle a cryptocurrency donation from a player",
-      "conditions": [
-        {
-          "type": "PaymentSDK::IsSDKInitialized",
-          "parameters": []
-        }
-      ],
-      "actions": [
-        {
-          "type": "PaymentSDK::ProcessDonation",
-          "parameters": ["donationAmount", "selectedCrypto", "donorWallet", false, "Player Donation", true]
-        }
-      ]
-    },
-    {
-      "name": "Convert USD to Cryptocurrency",
-      "description": "Convert USD amount to selected cryptocurrency",
-      "conditions": [
-        {
-          "type": "PaymentSDK::IsSDKInitialized",
-          "parameters": []
-        }
-      ],
-      "actions": [
-        {
-          "type": "PaymentSDK::ConvertUSDToCryptocurrency",
-          "parameters": ["usdAmount", "selectedCrypto"]
-        }
-      ]
-    }
-  ],
-
-  "runtimeSceneExtension": {
-    "code": "// Paste here your full gdjs.FreetimePaymentSDK implementation from your original file.\n// The structure should match the methods used above:\n// - initialize, isInitialized\n// - setUserWalletAddress, isWalletConfigured\n// - setAcceptedCryptocurrencies, isCryptocurrencyAccepted\n// - getWalletAddress, getFeeEstimate, sendCryptocurrency\n// - processDonation, convertUSDToCryptocurrency\n// - generateDeepLink, getTransactionStatus\n// - getLastTransactionHash, getLastDonationHash\n// - getFeeEstimateString, getDeepLink, getConvertedAmount\n// - getTransactionConfirmations, getSDKVersion\n"
-  }
+  ]
 }
