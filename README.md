@@ -421,11 +421,11 @@ This extension is based on [FreetimeSDK](https://github.com/FreetimeMaker/Freeti
 
 ## License
 
-This project is licensed under the LICENSE file. See [LICENSE](./LICENSE) for details.
+This project is licensed under the Apache-2.0 file. See [LICENSE](./LICENSE) for details.
 
 ## Support
 
-For issues, feature requests, or questions, please open an issue on the [GitHub repository](https://github.com/FreetimeMaker/Payment-SDK).
+For issues, feature requests, or questions, please open an issue on the [GitHub Repository](https://github.com/FreetimeMaker/Payment-SDK).
 
 ---
 
