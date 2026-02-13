@@ -48,7 +48,19 @@
       "description": "Initialize the Payment SDK",
       "sentence": "Initialize Payment SDK",
       "category": "Payments",
-      "events": []
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "Javascript",
+              "parameters": ["if (!window.PaymentSDK) { window.PaymentSDK = { initialized: true, wallets: {}, acceptedCoins: new Set(), transactions: [], exchangeRates: { BTC: 45000, ETH: 2500, LTC: 150, SOL: 100, BNB: 400, MATIC: 1, TRX: 0.15, BCH: 400, DOGE: 0.08 }, lastTransactionHash: null }; console.log('Payment SDK Initialized'); }"]
+            }
+          ],
+          "events": []
+        }
+      ]
     },
     {
       "name": "SetUserWalletAddress",
@@ -61,7 +73,19 @@
         {"name": "address", "type": "string", "description": "Wallet address"},
         {"name": "name", "type": "string", "description": "Wallet name", "optional": true}
       ],
-      "events": []
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "Javascript",
+              "parameters": ["const coinType = arguments[0]; const address = arguments[1]; const name = arguments[2] || 'My ' + coinType + ' Wallet'; if (!window.PaymentSDK) window.PaymentSDK = { wallets: {}, acceptedCoins: new Set(), transactions: [], exchangeRates: {} }; if (/^(0x)?[0-9a-fA-F]{40}$|^1[123][a-km-zA-HJ-NP-Z0-9]{25,34}$|^(ltc|bc)1[ac-hj-np-z02-9]{11,71}$/.test(address)) { window.PaymentSDK.wallets[coinType] = { address: address, name: name }; window.PaymentSDK.acceptedCoins.add(coinType); console.log('Wallet set: ' + coinType + ' -> ' + address); } else { console.error('Invalid address format'); }"]
+            }
+          ],
+          "events": []
+        }
+      ]
     },
     {
       "name": "SetAcceptedCryptocurrencies",
@@ -72,7 +96,19 @@
       "parameters": [
         {"name": "cryptocurrencies", "type": "string", "description": "Comma-separated list (BTC,ETH,LTC,SOL)"}
       ],
-      "events": []
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "Javascript",
+              "parameters": ["const cryptoList = arguments[0]; if (!window.PaymentSDK) window.PaymentSDK = { acceptedCoins: new Set(), wallets: {} }; cryptoList.split(',').forEach(coin => { window.PaymentSDK.acceptedCoins.add(coin.trim()); }); console.log('Accepted cryptocurrencies: ' + Array.from(window.PaymentSDK.acceptedCoins).join(', '));"]
+            }
+          ],
+          "events": []
+        }
+      ]
     },
     {
       "name": "SendCryptocurrency",
@@ -87,7 +123,19 @@
         {"name": "coinType", "type": "string", "description": "Cryptocurrency type"},
         {"name": "includeFees", "type": "boolean", "description": "Include fees", "optional": true}
       ],
-      "events": []
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "Javascript",
+              "parameters": ["const fromAddr = arguments[0]; const toAddr = arguments[1]; const amount = arguments[2]; const coinType = arguments[3]; const includeFees = arguments[4] !== false; if (!window.PaymentSDK) window.PaymentSDK = { transactions: [], lastTransactionHash: null }; const fee = amount * 0.005; const total = includeFees ? amount + fee : amount; const txHash = 'tx_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9); const tx = { id: txHash, from: fromAddr, to: toAddr, amount: amount, fee: includeFees ? fee : 0, total: total, coin: coinType, timestamp: Date.now(), status: 'confirmed' }; window.PaymentSDK.transactions.push(tx); window.PaymentSDK.lastTransactionHash = txHash; console.log('Transaction created: ' + txHash);"]
+            }
+          ],
+          "events": []
+        }
+      ]
     },
     {
       "name": "ProcessDonation",
@@ -101,7 +149,19 @@
         {"name": "donorWallet", "type": "string", "description": "Donor wallet address"},
         {"name": "noFees", "type": "boolean", "description": "No fees", "optional": true}
       ],
-      "events": []
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "Javascript",
+              "parameters": ["const amount = arguments[0]; const coinType = arguments[1]; const donorWallet = arguments[2]; const noFees = arguments[3] || false; if (!window.PaymentSDK) window.PaymentSDK = { transactions: [], lastTransactionHash: null }; const fee = noFees ? 0 : amount * 0.003; const total = amount + fee; const donationHash = 'donation_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9); const donation = { id: donationHash, type: 'donation', amount: amount, fee: fee, total: total, coin: coinType, donor: donorWallet, timestamp: Date.now(), status: 'confirmed' }; if (!window.PaymentSDK.transactions) window.PaymentSDK.transactions = []; window.PaymentSDK.transactions.push(donation); window.PaymentSDK.lastTransactionHash = donationHash; console.log('Donation processed: ' + donationHash);"]
+            }
+          ],
+          "events": []
+        }
+      ]
     },
     {
       "name": "ConvertUSDToCryptocurrency",
@@ -113,7 +173,19 @@
         {"name": "usdAmount", "type": "number", "description": "USD amount"},
         {"name": "coinType", "type": "string", "description": "Target cryptocurrency"}
       ],
-      "events": []
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "Javascript",
+              "parameters": ["const usdAmount = arguments[0]; const coinType = arguments[1]; if (!window.PaymentSDK) window.PaymentSDK = { exchangeRates: {}, convertedAmount: 0 }; const rate = window.PaymentSDK.exchangeRates[coinType] || 2000; const cryptoAmount = usdAmount / rate; window.PaymentSDK.convertedAmount = cryptoAmount; window.PaymentSDK.conversionRate = rate; console.log(usdAmount + ' USD = ' + cryptoAmount.toFixed(8) + ' ' + coinType);"]
+            }
+          ],
+          "events": []
+        }
+      ]
     },
     {
       "name": "IsSDKInitialized",
@@ -121,7 +193,20 @@
       "description": "Check if Payment SDK is initialized",
       "sentence": "Payment SDK is initialized",
       "category": "Payments",
-      "events": []
+      "isCondition": true,
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [
+            {
+              "type": "Javascript",
+              "parameters": ["return window.PaymentSDK && window.PaymentSDK.initialized === true;"]
+            }
+          ],
+          "actions": [],
+          "events": []
+        }
+      ]
     },
     {
       "name": "IsWalletConfigured",
@@ -129,10 +214,23 @@
       "description": "Check if wallet is configured",
       "sentence": "Wallet is configured for _PARAM0_",
       "category": "Wallet",
+      "isCondition": true,
       "parameters": [
         {"name": "coinType", "type": "string", "description": "Cryptocurrency type"}
       ],
-      "events": []
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [
+            {
+              "type": "Javascript",
+              "parameters": ["const coinType = arguments[0]; return window.PaymentSDK && window.PaymentSDK.wallets && window.PaymentSDK.wallets[coinType] != null;"]
+            }
+          ],
+          "actions": [],
+          "events": []
+        }
+      ]
     },
     {
       "name": "IsCryptocurrencyAccepted",
@@ -140,10 +238,23 @@
       "description": "Check if cryptocurrency is accepted",
       "sentence": "_PARAM0_ is accepted cryptocurrency",
       "category": "Configuration",
+      "isCondition": true,
       "parameters": [
         {"name": "coinType", "type": "string", "description": "Cryptocurrency type"}
       ],
-      "events": []
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [
+            {
+              "type": "Javascript",
+              "parameters": ["const coinType = arguments[0]; return window.PaymentSDK && window.PaymentSDK.acceptedCoins && window.PaymentSDK.acceptedCoins.has(coinType);"]
+            }
+          ],
+          "actions": [],
+          "events": []
+        }
+      ]
     },
     {
       "name": "GetTransactionHash",
@@ -151,7 +262,21 @@
       "description": "Get hash of last transaction",
       "sentence": "Last transaction hash",
       "category": "Payments",
-      "events": []
+      "isExpression": true,
+      "expressionType": "string",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "Javascript",
+              "parameters": ["if (!window.PaymentSDK) window.PaymentSDK = { lastTransactionHash: null }; const result = window.PaymentSDK.lastTransactionHash || 'none'; return result;"]
+            }
+          ],
+          "events": []
+        }
+      ]
     },
     {
       "name": "GetWalletAddress",
@@ -159,10 +284,24 @@
       "description": "Get wallet address for cryptocurrency",
       "sentence": "Wallet address for _PARAM0_",
       "category": "Wallet",
+      "isExpression": true,
+      "expressionType": "string",
       "parameters": [
         {"name": "coinType", "type": "string", "description": "Cryptocurrency type"}
       ],
-      "events": []
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "Javascript",
+              "parameters": ["const coinType = arguments[0]; if (!window.PaymentSDK || !window.PaymentSDK.wallets) return ''; const wallet = window.PaymentSDK.wallets[coinType]; return wallet ? wallet.address : '';"]
+            }
+          ],
+          "events": []
+        }
+      ]
     },
     {
       "name": "GetConvertedAmount",
@@ -170,7 +309,21 @@
       "description": "Get converted cryptocurrency amount",
       "sentence": "Converted amount",
       "category": "Conversion",
-      "events": []
+      "isExpression": true,
+      "expressionType": "number",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "Javascript",
+              "parameters": ["if (!window.PaymentSDK) window.PaymentSDK = { convertedAmount: 0 }; return window.PaymentSDK.convertedAmount || 0;"]
+            }
+          ],
+          "events": []
+        }
+      ]
     },
     {
       "name": "GetSDKVersion",
@@ -178,7 +331,21 @@
       "description": "Get SDK version",
       "sentence": "SDK version",
       "category": "Payments",
-      "events": []
+      "isExpression": true,
+      "expressionType": "string",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [],
+          "actions": [
+            {
+              "type": "Javascript",
+              "parameters": ["return '1.0.0';"]
+            }
+          ],
+          "events": []
+        }
+      ]
     }
   ]
 }

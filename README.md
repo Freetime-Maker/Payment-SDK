@@ -421,7 +421,7 @@ This extension is based on [FreetimeSDK](https://github.com/FreetimeMaker/Freeti
 
 ## License
 
-This project is licensed under the Apache-2.0 file. See [LICENSE](./LICENSE) for details.
+This project is licensed under the Apache-2.0 License. See [LICENSE](./LICENSE) for details.
 
 ## Support
 
